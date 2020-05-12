@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">Android Task</string>
+    <string name="title_activity_maps">Map</string>
+    <string name="cancel_button_title">Cancel</string>
+    <string name="ok_button_title">OK</string>
+    <string name="no_result_found">No Result Found</string>
+
+</resources>

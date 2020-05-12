@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "594113526509",
+    "firebase_url": "https://workers-direct.firebaseio.com",
+    "project_id": "workers-direct",
+    "storage_bucket": "workers-direct.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:594113526509:android:9826a4e116fe6b7e",
+        "android_client_info": {
+          "package_name": "ham.gog.workersdirect"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "594113526509-8htfh4l3tfuqd0pgd8o3ru60f9dgd1m3.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "ham.gog.workersdirect",
+            "certificate_hash": "df8d07dd273802734eaa2c8640e1a714df625849"
+          }
+        },
+        {
+          "client_id": "594113526509-oa80o23dodajeulcbaosd3uoi80fo24v.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBy9aZh0--tw-cF11JAFn-TMIRKM7HcfR8"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "594113526509-oa80o23dodajeulcbaosd3uoi80fo24v.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
