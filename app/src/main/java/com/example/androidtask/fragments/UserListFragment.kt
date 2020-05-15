@@ -1,15 +1,18 @@
-package com.example.androidtask.activities
+package com.example.androidtask.fragments
 
 import android.Manifest
 import android.os.Bundle
+import android.view.LayoutInflater
 import android.view.View
+import android.view.ViewGroup
 import android.widget.AbsListView
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.androidtask.R
 import com.example.androidtask.adapters.UserAdapter
+import com.example.androidtask.base.BaseFragment
 import com.example.androidtask.model.usermodel.User
 import com.example.androidtask.utils.Utils
 import com.example.androidtask.viewmodel.UserViewModel
@@ -21,10 +24,11 @@ import com.karumi.dexter.PermissionToken
 import com.karumi.dexter.listener.PermissionRequest
 import com.karumi.dexter.listener.multi.MultiplePermissionsListener
 import kotlinx.android.synthetic.main.activity_users.*
+import kotlinx.android.synthetic.main.activity_users.view.*
 import org.json.JSONObject
 import java.lang.reflect.Type
 
-class UserListActivity : BaseActivity() {
+class UserListActivity : BaseFragment() {
     var isScrolling: Boolean? = false
     var currentItems: Int = 0
     var totalItems: Int = 0
@@ -32,24 +36,36 @@ class UserListActivity : BaseActivity() {
     var manager: LinearLayoutManager? = null
     var count: Int = 6
     var items: MutableList<User> = mutableListOf()
+    var mView : View? = null
+
     private lateinit var viewModel: UserViewModel
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        viewModel = ViewModelProvider.NewInstanceFactory().create(UserViewModel::class.java)
-        setContentView(R.layout.activity_users)
+//    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+//
+//
+//
+//    }
+
+    override fun onCreateChildView(inflater: LayoutInflater?, parent: ViewGroup?, savedInstanceState: Bundle?): View {
+        mView = inflater!!.inflate(R.layout.activity_users, parent, false)
         init()
+        return mView!!
     }
+//    override fun onCreate(savedInstanceState: Bundle?) {
+//        super.onCreate(savedInstanceState)
+//        viewModel = ViewModelProvider.NewInstanceFactory().create(UserViewModel::class.java)
+//        setContentView(R.layout.activity_users)
+//    }
 
     private fun init() {
-        manager = LinearLayoutManager(this)
-        users_recyclerview.adapter = UserAdapter(items, this, this)
-        users_recyclerview.layoutManager = manager
+        manager = LinearLayoutManager(activity!!)
+        mView!!.users_recyclerview.adapter = UserAdapter(items, activity!!, this)
+        mView!!.users_recyclerview.layoutManager = manager
         apiCall()
-        swipeToRefresh?.setOnRefreshListener {
+        mView!!.swipeToRefresh?.setOnRefreshListener {
             apiCall()
         }
         pagination()
-        Dexter.withActivity(this).withPermissions(Manifest.permission.ACCESS_COARSE_LOCATION, Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.READ_EXTERNAL_STORAGE).withListener(object :
+        Dexter.withActivity(activity).withPermissions(Manifest.permission.ACCESS_COARSE_LOCATION, Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.READ_EXTERNAL_STORAGE).withListener(object :
             MultiplePermissionsListener {
             override fun onPermissionsChecked(report: MultiplePermissionsReport) { /* ... */
             }
@@ -59,8 +75,8 @@ class UserListActivity : BaseActivity() {
         }).check()
     }
     private fun apiCall(){
-        if (Utils.checkConnection(this)) {
-            progressBar.show(this)
+        if (Utils.checkConnection(activity)) {
+            progressBar.show(activity!!)
             getUserApiResponse()
         } else {
             showDialog("No Internet Connection")
@@ -91,7 +107,7 @@ class UserListActivity : BaseActivity() {
     }
 
     private fun getUserApiResponse() {
-        viewModel.getUserDetails.observe(this, Observer { userResponse ->
+        viewModel.getUserDetails.observe(activity!!, Observer { userResponse ->
             progressBar.dialog.dismiss()
             if (userResponse != null) {
                 val gson = Gson()
@@ -103,7 +119,7 @@ class UserListActivity : BaseActivity() {
                     val listType: Type = object : TypeToken<List<User>>() {}.type
                     val posts: List<User> = gson.fromJson(body.toString(), listType)
                     items.addAll(posts)
-                    users_recyclerview.adapter!!.notifyDataSetChanged()
+                    mView!!.users_recyclerview.adapter!!.notifyDataSetChanged()
                 }
                 if (items.size > 0) {
                     recyclerViewVisibility(true)
@@ -114,17 +130,17 @@ class UserListActivity : BaseActivity() {
             else{
                 recyclerViewVisibility(false)
             }
-            swipeToRefresh.isRefreshing=false
+            mView!!.swipeToRefresh.isRefreshing=false
         })
     }
 
     private fun recyclerViewVisibility(visibility: Boolean) {
         if (visibility) {
-            users_recyclerview.visibility = View.VISIBLE
-            no_result_textview.visibility = View.GONE
+            mView!!.users_recyclerview.visibility = View.VISIBLE
+            mView!!.no_result_textview.visibility = View.GONE
         } else {
-            users_recyclerview.visibility = View.GONE
-            no_result_textview.visibility = View.VISIBLE
+            mView!!.users_recyclerview.visibility = View.GONE
+            mView!!.no_result_textview.visibility = View.VISIBLE
         }
     }
 }

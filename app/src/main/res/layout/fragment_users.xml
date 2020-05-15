@@ -5,6 +5,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
     <include layout="@layout/action_bar_layout"
+        android:visibility="gone"
         android:id="@+id/action_bar"/>
     <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
             android:id="@+id/swipeToRefresh"
