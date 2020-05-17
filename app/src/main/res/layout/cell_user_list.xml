@@ -14,7 +14,7 @@
         android:id="@+id/cell_layout"
         android:background="?attr/selectableItemBackground"
         android:padding="@dimen/_5sdp">
-        <TextView
+        <com.google.android.material.textview.MaterialTextView
             android:id="@+id/name_textview"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -25,7 +25,7 @@
             android:textSize="@dimen/_11ssp" />
 
 
-        <TextView
+        <com.google.android.material.textview.MaterialTextView
             android:id="@+id/email_textview"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -36,7 +36,7 @@
             android:textColor="@color/black"
             android:textSize="@dimen/_11ssp" />
 
-        <TextView
+        <com.google.android.material.textview.MaterialTextView
             android:id="@+id/phone_textview"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

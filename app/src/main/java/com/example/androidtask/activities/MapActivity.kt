@@ -2,6 +2,7 @@ package com.example.androidtask.activities
 
 import android.os.Bundle
 import com.example.androidtask.R
+import com.example.androidtask.base.BaseActivity
 import com.example.androidtask.model.usermodel.User
 import com.example.androidtask.viewmodel.UserViewModel
 import com.google.android.gms.maps.CameraUpdateFactory
@@ -11,7 +12,6 @@ import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.Marker
 import com.google.android.gms.maps.model.MarkerOptions
-
 
 open class MapActivity : BaseActivity(), OnMapReadyCallback {
     private lateinit var mMap: GoogleMap

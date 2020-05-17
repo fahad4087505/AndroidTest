@@ -7,14 +7,13 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.LinearLayout
 import android.widget.TextView
-import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.androidtask.R
 import com.example.androidtask.activities.MapActivity
-import com.example.androidtask.activities.UserListActivity
+import com.example.androidtask.fragments.UserListFragment
 import com.example.androidtask.model.usermodel.User
 import kotlinx.android.synthetic.main.cell_user_list.view.*
-class UserAdapter(val items: List<User>, val context: Context, val listener: UserListActivity) : RecyclerView.Adapter<UserViewHolder>() {
+class UserAdapter(val items: List<User>, val context: Context, val listener: UserListFragment) : RecyclerView.Adapter<UserViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): UserViewHolder {
         return UserViewHolder(LayoutInflater.from(context).inflate(R.layout.cell_user_list, parent, false))
     }
